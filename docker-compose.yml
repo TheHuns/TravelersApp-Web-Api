@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  client:
+    #restart: always
+    build:
+      context: ./client
+      dockerfile: dockerfile
+    volumes:
+      - "./client:/app"
+      - "./client/node_modules:/app/node_modules"
+    # set the environment to development
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 8080:3000
+    depends_on:
+      - api
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+  api:
+    container_name: api
+    #restart: always
+    build:
+      context: ./api
+      dockerfile: dockerfile
+    volumes:
+      - "./api:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    depends_on:
+      - mongo
+    ports:
+      - 5000:3000
