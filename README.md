@@ -6,29 +6,23 @@
 - client will run on http://localhost:3000
 - GraphQL API test page is at http://localhost:5000/graphql very cool tool, link in docker output to terminal also
 
-To get started for the first time run the following command in root of the project
-
-```
-docker-compose up --build
-```
-
-After the first build, image data will be cached and the following will get you up and running quickly
+To get started, run the following command in the root of the project:
 
 ```
 docker-compose up
 ```
 
+The first time you do this, Docker downloads the necessary images and builds containers, so it will take longer to start.  Once everything is in place, it will build much faster.
+
 ---
 
-To tear down after working
+### Useful Docker Commands
 
-```
-docker-compose down
-```
-
-Other options exist to add to the above command to remove images, volumes, etc,
-
-```
-#This will give short list of options
-docker-compose down --help
-```
+Type | Command | Description
+-|-|-
+Start up | `docker-compose up` | Builds and starts the project
+Tear Down | `docker-compose down` | Resets the project back the original state, wipes the database
+Stop all containers | `docker-compose stop` | Stops all running containers.  Use this if you've killed your containers before starting up again
+Restart a container | `docker-compose restart <containerName>` | Restarts a single container
+Container bash | `docker-compose exec <containerName> bash` | Opens the bash terminal for that container where you can do things like run `npm install`
+Help menu | `docker-compose --help` | Provides a short list of options. You can also use the shortcut command `docker-compose -h` for the same list.
