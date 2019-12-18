@@ -11,6 +11,7 @@ services:
     # set the environment to development
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING="true"
     ports:
       - 3000:3000
     depends_on:
