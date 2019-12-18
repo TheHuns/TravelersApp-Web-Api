@@ -12,6 +12,7 @@ services:
       DANGEROUSLY_DISABLE_HOST_CHECK: 'true'
       BACKEND: api:5000
       NODE_PATH: /src/client/src
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/src
     ports:
