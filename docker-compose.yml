@@ -1,36 +1,27 @@
-version: "3.7"
+version: '2.1'
 services:
   client:
-    #restart: always
     build:
-      context: ./client
-      dockerfile: dockerfile
+      context: .
+      dockerfile: Dockerfile.webpack
+      args:
+        PACKAGE_PATH: ./client
+        WORKING_DIR: /src/client
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: ./api
+        WORKING_DIR: /src/api
     volumes:
-      - "./client:/app"
-      - "/app/node_modules"
-    # set the environment to development
-    environment:
-      - NODE_ENV=development
-    ports:
-      - 8080:3000
+      - .:/src
+      - /src/api/node_modules
+    command: ['npm', 'start']
     depends_on:
-      - api
-
+      - mongo
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
-  api:
-    container_name: api
-    #restart: always
-    build:
-      context: ./api
-      dockerfile: dockerfile
-    volumes:
-      - "./api:/usr/src/app"
-      - "/usr/src/app/node_modules"
-    depends_on:
-      - mongo
-    ports:
-      - 5000:5000
