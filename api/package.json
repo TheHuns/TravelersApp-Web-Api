@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon -L server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.9.13",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
     "graphql": "^14.5.8",
     "mongoose": "^5.8.0",
     "nodemon": "^2.0.1"

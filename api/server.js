@@ -1,23 +1,30 @@
 const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
-require("./config");
+const graphql = require("express-graphql");
+const schema = require("./schema/schema");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "Hello World!"
-  }
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
-server.applyMiddleware({ app });
 
-app.listen({ port: 5000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:5000${server.graphqlPath}`)
+// allow cross origin requests
+app.use(cors());
+
+mongoose.connect("mongodb://mongo:27017/graphqldb", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to database");
+});
+
+app.use(
+  "/graphql",
+  graphql({
+    schema,
+    graphiql: true
+  })
 );
+
+app.listen(5000, () => {
+  console.log("api running on port 5000/graphql");
+});
