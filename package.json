@@ -1,0 +1,28 @@
+{
+  "name": "travelersapp-root",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "concurrently \"npm install --prefix client\" \"npm install --prefix api\"",
+    "install-api": "npm install --prefix api",
+    "install-client": "npm install --prefix client",
+    "server": "nodemon server.js --prefix api",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheHuns/TravelersApp-Web-Api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheHuns/TravelersApp-Web-Api/issues"
+  },
+  "homepage": "https://github.com/TheHuns/TravelersApp-Web-Api#readme",
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  }
+}
