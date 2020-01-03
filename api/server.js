@@ -3,18 +3,21 @@ const graphql = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const config = require("config");
 
 const app = express();
 
 // allow cross origin requests
 app.use(cors());
 
-mongoose.connect("mongodb://mongo:27017/graphqldb", {
+const db = config.get("mongoURI");
+
+mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 mongoose.connection.once("open", () => {
-  console.log("connected to database");
+  console.log("MongoDB connected");
 });
 
 app.use(
@@ -26,5 +29,5 @@ app.use(
 );
 
 app.listen(5000, () => {
-  console.log("api running on port 5000/graphql");
+  console.log("api running at http://localhost:5000/graphql");
 });
