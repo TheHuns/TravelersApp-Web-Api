@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-all": "concurrently \"npm install --prefix client\" \"npm install --prefix api\"",
-    "install-api": "npm install --prefix api",
-    "install-client": "npm install --prefix client",
+    "install-all": "yarn install && yarn install-api && yarn install-client",
+    "install-api": "cd api && yarn install",
+    "install-client": "cd client && yarn install",
     "server": "nodemon server.js --prefix api",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""

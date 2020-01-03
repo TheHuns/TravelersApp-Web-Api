@@ -9,14 +9,17 @@
 
 ### Set-up
 
-To get started, run one of the following commands in the root of the project:
+We will be using yarn as out package manager for this project, if not already installed on your maching run
 
 ```
-npm install
-yarn install
+npm i -g yarn
 ```
 
-You'll the need to cd in to the client and api directories and do the same.
+To get started, run the following commands in the root of the project:
+
+```
+yarn install-all
+```
 
 ---
 
@@ -39,9 +42,8 @@ Inside the default.json there should be the following json object with the link 
 
 ### Running the project
 
-Then return to the root directory and the single command will get client and api running simultaneously
+Then the single command will get client and api running simultaneously
 
 ```
-npm run dev  //or
 yarn dev
 ```
