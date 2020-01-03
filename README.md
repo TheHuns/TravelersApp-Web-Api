@@ -9,13 +9,13 @@
 
 ### Set-up
 
-We will be using yarn as out package manager for this project, if not already installed on your maching run
+We will be using yarn as our package manager for this project, if not already installed on your machine run
 
 ```
 npm i -g yarn
 ```
 
-To get started, run the following commands in the root of the project:
+To get started, run the following command in the root of the project:
 
 ```
 yarn install-all
@@ -27,7 +27,7 @@ yarn install-all
 
 In the root of the project you need a directory named config which contains a file named default.json (create these if they do not come in with repo)
 
-Inside the default.json there should be the following json object with the link to your mongoDB replaceing the placeholder here.
+Inside the default.json there should be the following json object with the link to your mongoDB replacing the placeholder here.
 
 ```json
 {
