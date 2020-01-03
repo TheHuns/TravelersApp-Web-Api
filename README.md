@@ -3,7 +3,7 @@
 ## Locations
 
 - client will run on http://localhost:3000
-- GraphQL API test page is at http://localhost:5000/graphql very cool tool, link in docker output to terminal also
+- GraphQL API test page is at http://localhost:5000/graphql , link in output to terminal also
 
 ---
 
