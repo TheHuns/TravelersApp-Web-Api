@@ -40,6 +40,17 @@ Inside the default.json there should be the following json object with the link 
 
 ---
 
+### Connecting to Open Cage GeoLocator API
+
+In the root of the project you need a file named .env
+
+Inside the .env there should be the following:
+
+REACT_APP_GEO_CODER_API_KEY= "API Key Here"
+
+You will need to create an account on www.opencagedata.com/api
+It's very easy and free, this will provide you with the API Key needed
+
 ### Running the project
 
 Then the single command will get client and api running simultaneously

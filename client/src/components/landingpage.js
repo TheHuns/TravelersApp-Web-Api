@@ -13,7 +13,7 @@ function LandingPage() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(displayLocationInfo)
 		}
-	})
+	}, [])
 
 	function displayLocationInfo(position) {
 		const lng = position.coords.longitude;
@@ -21,9 +21,14 @@ function LandingPage() {
 		const API_KEY = `${process.env.REACT_APP_GEO_CODER_API_KEY}`;
 		axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${API_KEY}`)
 			.then((response) => {
-				let city = response.data.results[0].components.town
-				let state = response.data.results[0].components.state_code
-				setPlaceholder(`${city}, ${state}`)
+				console.log(response)
+				if (response.data.results.length) {
+					if (response.data.results[0].components.town || response.data.results[0].components.city && response.data.results[0].components.state_code){
+						let city = response.data.results[0].components.town || response.data.results[0].components.city
+						let state = response.data.results[0].components.state_code
+						setPlaceholder(`${city}, ${state}`)
+					}
+				}
 			}, (error) => {
 				console.log(error)
 			})
