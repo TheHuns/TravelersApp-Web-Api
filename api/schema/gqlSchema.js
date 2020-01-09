@@ -8,6 +8,7 @@ const app = express();
 // Mongoose setup to connect to DB
 const db = config.get("mongoURI");
 const Location = require("../models/location");
+const Venue = require("../models/venue");
 
 mongoose.connect(db, {
   useNewUrlParser: true,
@@ -17,77 +18,13 @@ mongoose.connection.once("open", () => {
   console.log("MongoDB connected");
 });
 
-// DUMMY DATA
-const locationsList = [
-  { name: "Durango", state: "Colorado", id: 1 },
-  { name: "Bayfield", state: "Colorado", id: 2 },
-  { name: "Silverton", state: "Colorado", id: 3 }
-];
-
-const venuesList = [
-  {
-    businessName: "Ska Brewing",
-    address: "800 Turner Dr",
-    website: "skabrewing.com",
-    locationId: 1,
-    id: 1
-  },
-  {
-    businessName: "Bottom Shelf Brewing",
-    address: "200 Mill Street",
-    website: "bottomshelf.com",
-    locationId: 2,
-    id: 2
-  },
-  {
-    businessName: "Avalanche Cafe",
-    address: "400 Blair St",
-    website: "avalanchecafe.com",
-    locationId: 3,
-    id: 3
-  }
-];
-
-const hours = [
-  {
-    monday: [0800, 2000],
-    tuesday: [0700, 1900],
-    wednesday: [0700, 1900],
-    thurday: [0700, 1900],
-    friday: [0700, 1900],
-    saturday: [0700, 1900],
-    sunday: [0700, 1900],
-    businessId: 1
-  },
-  {
-    monday: [0800, 2000],
-    tuesday: [0700, 2000],
-    wednesday: [0700, 2200],
-    thurday: [0700, 2200],
-    friday: [0700, 2200],
-    saturday: [0700, 2200],
-    sunday: [0700, 2200],
-    businessId: 2
-  },
-  {
-    monday: [1100, 2000],
-    tuesday: [1100, 1900],
-    wednesday: [1100, 1900],
-    thurday: [1100, 1900],
-    friday: [1100, 1900],
-    saturday: [1100, 1900],
-    sunday: [1100, 1900],
-    businessId: 3
-  }
-];
-
 // GraphQl type definitions(similair to models for db)
 const typeDefs = gql`
   type Query {
-    location(id: ID): Location!
-    locations: [Location]
-    venue(id: ID): Venue
-    venues: [Venue]
+    getLocation(id: ID): Location!
+    getLocations: [Location]
+    getVenue(id: ID): Venue
+    getVenues: [Venue]
   }
 
   type Location {
@@ -106,6 +43,10 @@ const typeDefs = gql`
     address: String!
     locationId: ID!
     location: Location
+    state: String!
+    zip: Int
+    hours: Hours
+    parking: String
   }
 
   type Hours {
@@ -131,17 +72,17 @@ const typeDefs = gql`
 // Resolvers determine what happen when a query or mutaion is called
 const resolvers = {
   Query: {
-    location: (parent, { id }) => {
+    getLocation: (parent, { id }) => {
       return Location.findById({ _id: id });
     },
-    locations: () => {
-      return locationsList;
+    getLocations: () => {
+      return Location.find({});
     },
-    venue: (parent, { id }) => {
-      return _.find(venuesList, { id: id });
+    getVenue: (parent, { id }) => {
+      return Venue.findById({ _id: id });
     },
-    venues: () => {
-      return venuesList;
+    getVenues: () => {
+      return Venue.find({});
     }
   },
   Mutation: {

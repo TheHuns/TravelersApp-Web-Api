@@ -10,7 +10,8 @@ const venueSchema = new Schema({
   locationId: String,
   state: String,
   zip: Number,
-  hours: Object
+  hours: Object,
+  parking: String
 });
 
 module.exports = mongoose.model("Venue", venueSchema);
