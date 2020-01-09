@@ -47,3 +47,44 @@ Then the single command will get client and api running simultaneously
 ```
 yarn dev
 ```
+
+---
+
+### Example queries to API
+
+#### These can also be seen in the schema and docs tab for the GraphiQL Playground
+
+Get all Locations
+
+```
+{
+  getLocations{
+    name
+    state
+  }
+}
+```
+
+Get all Venues
+
+```
+{
+  getVenues{
+    businessName
+    category
+    parking
+  }
+}
+```
+
+Add a location
+
+```
+mutation {
+  addLocation(locationInfo:{name: "<City>", state: "<State>"}) {
+    name
+    state
+    id
+  }
+}
+```
