@@ -54,6 +54,8 @@ yarn dev
 
 #### These can also be seen in the schema and docs tab for the GraphiQL Playground
 
+- Went with the naming convention of "Location" to mean a city, town, county etc. and "Venue" to refer to a coffee shop, restaurant, bar, etc.
+
 Get all Locations
 
 ```
@@ -84,6 +86,36 @@ mutation {
   addLocation(locationInfo:{name: "<City>", state: "<State>"}) {
     name
     state
+    id
+  }
+}
+```
+
+Add a Venue
+
+```
+mutation {
+  addVenue(
+    venueInfo: {
+      businessName: "<business name>"
+      category: "<category>>"
+      website: "<website>"
+      phone: "<phone number>"
+      address: "<street address>"
+      state: "<state>",
+      locationId:"5e188cfd59b1201ba412fd7b"  //<--example: will come from selecting state/city on the form -- for development addLocation first then use the _id of that document here
+    },
+    hoursInfo: {
+       monday: [1800, 2200]
+       tuesday: [1800, 2200]
+       wednesday: [1800, 2200]
+       thursday: [1800, 2200]
+       friday: [1800, 2200]
+       saturday: [100, 2200]
+       sunday: [1800, 2200]
+    }
+  ) {
+    businessName  // values returned after business saved to db
     id
   }
 }
