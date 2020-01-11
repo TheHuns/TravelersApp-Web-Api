@@ -111,6 +111,11 @@ const resolvers = {
       return locationData;
     }
   },
+  Location: {
+    venues: async location => {
+      return Venue.find({ locationId: location.id });
+    }
+  },
 
   // The GET routes for this api
   Query: {
