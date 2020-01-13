@@ -42,7 +42,7 @@ Inside the default.json there should be the following json object with the link 
 
 ### Connecting to Open Cage GeoLocator API
 
-In the root of the project you need a file named .env
+In the client directory you need a file named .env
 
 Inside the .env there should be the following:
 
