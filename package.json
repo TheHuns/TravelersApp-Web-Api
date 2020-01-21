@@ -9,7 +9,8 @@
     "install-client": "cd client && yarn install",
     "server": "nodemon server.js --prefix api",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "sass": "node-sass -w client/src/css/sass/ -o client/src/css/ --recursive"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/TheHuns/TravelersApp-Web-Api#readme",
   "dependencies": {
     "axios": "^0.19.1",
-    "concurrently": "^5.0.2"
+    "concurrently": "^5.0.2",
+    "node-sass": "^4.13.1"
   }
 }

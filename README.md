@@ -40,7 +40,7 @@ Inside the default.json there should be the following json object with the link 
 
 ---
 
-### Connecting to Open Cage GeoLocator API
+#### Connecting to Open Cage GeoLocator API
 
 In the client directory you need a file named .env
 
@@ -51,7 +51,9 @@ REACT_APP_GEO_CODER_API_KEY= "API Key Here"
 You will need to create an account on www.opencagedata.com/api
 It's very easy and free, this will provide you with the API Key needed
 
-### Running the project
+---
+
+## Running the project
 
 Then the single command will get client and api running simultaneously
 
@@ -59,11 +61,17 @@ Then the single command will get client and api running simultaneously
 yarn dev
 ```
 
+> If you need to work on the design/style, you'll need to open another tab in your terminal and run the following command
+
+```
+yarn sass
+```
+
 ---
 
-### Example queries to API
+#### Example queries to API
 
-#### These can also be seen in the schema and docs tab for the GraphiQL Playground
+##### These can also be seen in the schema and docs tab for the GraphiQL Playground
 
 - Went with the naming convention of "Location" to mean a city, town, county etc. and "Venue" to refer to a coffee shop, restaurant, bar, etc.
 
