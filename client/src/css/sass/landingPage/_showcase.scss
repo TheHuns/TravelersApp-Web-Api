@@ -1,9 +1,3 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; }
-
 #landingContainer {
   height: 100vh;
   width: 100vw;
@@ -11,27 +5,34 @@ html {
   top: 0;
   left: 0;
   background-image: url("../assets/city-skyline.jpg");
-  background-size: cover; }
-  #landingContainer .overlay {
+  background-size: cover;
+
+  .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0b0c10;
+    background-color: $black;
     opacity: 0.96;
-    z-index: 2; }
-  #landingContainer .sign-in {
+    z-index: 2;
+  }
+
+  .sign-in {
     margin: 0;
     padding: 0;
     position: absolute;
     top: 2rem;
     right: 3rem;
-    z-index: 3; }
-    #landingContainer .sign-in a {
-      color: #e2dede;
-      text-decoration: none; }
-  #landingContainer .search-area {
+    z-index: 3;
+
+    a {
+      color: $text-light;
+      text-decoration: none;
+    }
+  }
+
+  .search-area {
     width: 40%;
     z-index: 3;
     position: absolute;
@@ -41,32 +42,43 @@ html {
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    align-items: center; }
-    #landingContainer .search-area #logo {
-      max-width: 400px; }
-      #landingContainer .search-area #logo .st0 {
+    align-items: center;
+
+    #logo {
+      max-width: 400px;
+      .st0 {
         font-family: "Impact";
-        fill: #66fcf1; }
-      #landingContainer .search-area #logo .st1 {
-        font-size: 264px; }
-      #landingContainer .search-area #logo .st2 {
-        font-size: 92px; }
-      #landingContainer .search-area #logo .st3 {
-        font-size: 130px; }
-    #landingContainer .search-area .icons {
+        fill: $primary-color;
+      }
+      .st1 {
+        font-size: 264px;
+      }
+      .st2 {
+        font-size: 92px;
+      }
+      .st3 {
+        font-size: 130px;
+      }
+    }
+
+    .icons {
       display: flex;
-      color: #e2dede;
+      color: $text-light;
       z-index: 3;
       width: 100%;
       justify-content: space-between;
-      margin-top: 2rem; }
+      margin-top: 2rem;
 
-@keyframes play60 {
-  0% {
-    background-position: 0px 0px; }
-  100% {
-    background-position: -2400px 0px; } }
-      #landingContainer .search-area .icons #anything-icon {
+      @keyframes play60 {
+        0% {
+          background-position: 0px 0px;
+        }
+        100% {
+          background-position: -2400px 0px;
+        }
+      }
+
+      #anything-icon {
         background-image: url("../assets/worldAnimated.svg");
         animation-duration: 1000ms;
         animation-timing-function: steps(60);
@@ -74,8 +86,9 @@ html {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
-        cursor: pointer; }
-      #landingContainer .search-area .icons #coffee-icon {
+        cursor: pointer;
+      }
+      #coffee-icon {
         background-image: url("../assets/coffeeAnimated.svg");
         animation-duration: 1000ms;
         animation-timing-function: steps(60);
@@ -83,8 +96,9 @@ html {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
-        cursor: pointer; }
-      #landingContainer .search-area .icons #food-icon {
+        cursor: pointer;
+      }
+      #food-icon {
         background-image: url("../assets/foodAnimated.svg");
         animation-duration: 1000ms;
         animation-timing-function: steps(60);
@@ -92,8 +106,9 @@ html {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
-        cursor: pointer; }
-      #landingContainer .search-area .icons #drinks-icon {
+        cursor: pointer;
+      }
+      #drinks-icon {
         background-image: url("../assets/drinksAnimated.svg");
         animation-duration: 1000ms;
         animation-timing-function: steps(60);
@@ -101,8 +116,9 @@ html {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
-        cursor: pointer; }
-      #landingContainer .search-area .icons #people-icon {
+        cursor: pointer;
+      }
+      #people-icon {
         background-image: url("../assets/peopleAnimated.svg");
         animation-duration: 1000ms;
         animation-timing-function: steps(60);
@@ -110,32 +126,47 @@ html {
         width: 40px;
         height: 40px;
         background-repeat: no-repeat;
-        cursor: pointer; }
-      #landingContainer .search-area .icons .play60 {
-        animation-name: play60; }
-    #landingContainer .search-area .search-field {
-      color: #e2dede;
+        cursor: pointer;
+      }
+      .play60 {
+        animation-name: play60;
+      }
+    }
+
+    .search-field {
+      color: $text-light;
       width: 100%;
-      margin-top: 1rem; }
-      #landingContainer .search-area .search-field .search-bar {
+      margin-top: 1rem;
+
+      .search-bar {
         width: 100%;
-        display: flex; }
-        #landingContainer .search-area .search-field .search-bar input {
-          background-color: #1f2833;
+        display: flex;
+
+        input {
+          background-color: $mid-dark;
           border: none;
           width: 100%;
           padding: 0.5rem;
-          color: #e2dede; }
-        #landingContainer .search-area .search-field .search-bar .search-button {
+          color: $text-light;
+        }
+
+        .search-button {
           width: 40px;
-          background: #66fcf1;
-          color: #1f2833;
+          background: $primary-color;
+          color: $mid-dark;
           text-align: center;
           font-weight: bold;
-          cursor: pointer; }
-          #landingContainer .search-area .search-field .search-bar .search-button .search-icon {
+          cursor: pointer;
+
+          .search-icon {
             background-image: url("../assets/searchSVG2.svg");
             height: 100%;
             width: 100%;
             z-index: 4;
-            background-repeat: no-repeat; }
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+  }
+}
