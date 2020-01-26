@@ -10,6 +10,7 @@ import CoffeeIcon from "./icons/CoffeeIcon";
 import FoodIcon from "./icons/FoodIcon";
 import DrinksIcon from "./icons/DrinksIcon";
 import PeopleIcon from "./icons/PeopleIcon";
+import BrandSVG from "./icons/BrandSVG";
 
 function LandingPage() {
   const [icon, chooseIcon] = useState("Anything");
@@ -75,25 +76,8 @@ function LandingPage() {
       </div>
       <div className="search-area">
         {/* Main logo area */}
-        <svg version="1.1" id="logo" x="0px" y="0px" viewBox="0 0 540 230">
-          <text
-            transform="matrix(1.0708 0 0 1 -4.3916 221.2207)"
-            className="st0 st1"
-          >
-            5
-          </text>
-          <text
-            transform="matrix(1 0 0 1 139.5039 88.3936)"
-            className="st0 st2"
-          >
-            O’Clock
-          </text>
-          <text
-            transform="matrix(1 0 0 1 139.1416 208.916)"
-            className="st0 st3"
-          >
-            Friends
-          </text>
+        <svg id="logo" viewBox="0 0 540 230">
+          <BrandSVG />
         </svg>
 
         {/* Selectable Icons */}
