@@ -9,8 +9,7 @@
     "install-client": "cd client && yarn install",
     "server": "nodemon server.js --prefix api",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "sass": "node-sass -w client/src/css/sass/ -o client/src/css/ --recursive"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
