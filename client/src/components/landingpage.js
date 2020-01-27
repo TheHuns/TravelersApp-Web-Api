@@ -35,7 +35,6 @@ function LandingPage() {
       )
       .then(
         response => {
-          console.log(response);
           if (response.data.results.length) {
             if (
               response.data.results[0].components.town ||
