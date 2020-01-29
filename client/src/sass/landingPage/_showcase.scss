@@ -1,0 +1,176 @@
+@import "../config/media";
+
+#landingContainer {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../../assets/city-skyline.jpg");
+  background-size: cover;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $black;
+    opacity: 0.96;
+    z-index: 2;
+  }
+
+  .sign-in {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    z-index: 3;
+
+    a {
+      color: $text-light;
+      text-decoration: none;
+    }
+  }
+
+  .search-area {
+    width: 40%;
+    z-index: 3;
+    position: absolute;
+    max-width: 550px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    #logo {
+      max-width: 400px;
+      .st0 {
+        font-family: "Impact";
+        fill: $primary-color;
+      }
+      .st1 {
+        font-size: 264px;
+      }
+      .st2 {
+        font-size: 92px;
+      }
+      .st3 {
+        font-size: 130px;
+      }
+    }
+
+    .icons {
+      display: flex;
+      color: $text-light;
+      z-index: 3;
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 2rem;
+
+      & > div {
+        width: 40px;
+        height: 40px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        padding-bottom: 1.6rem;
+      }
+
+      #anything-icon,
+      #coffee-icon,
+      #food-icon,
+      #drinks-icon,
+      #people-icon {
+        pointer-events: none;
+
+        .st1,
+        .st0,
+        .st2 {
+          stroke-width: 2;
+          stroke: $primary-color;
+          fill: none;
+        }
+
+        & .active {
+          .st1,
+          .st0,
+          .st2 {
+            stroke: $text-light;
+          }
+        }
+      }
+    }
+
+    .search-field {
+      color: $text-light;
+      width: 100%;
+      margin-top: 2rem;
+
+      .search-bar {
+        width: 100%;
+        display: flex;
+        margin-top: 1rem;
+
+        input {
+          background-color: $mid-dark;
+          border: none;
+          width: 100%;
+          padding: 0.5rem;
+          color: $text-light;
+        }
+
+        .search-button {
+          width: 40px;
+          padding: 0;
+          padding-top: 4px;
+          background: $primary-color;
+          position: relative;
+          color: $mid-dark;
+          text-align: center;
+          font-weight: bold;
+          cursor: pointer;
+
+          .search-icon {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  #landingContainer {
+    .search-area {
+      width: 70%;
+      #logo {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@include phone {
+  #landingContainer {
+    .search-area {
+      width: 80%;
+      top: 40%;
+      #logo {
+        width: 250px;
+      }
+      .icons {
+        margin-top: 4rem;
+      }
+      .search-field {
+        margin-top: 4rem;
+      }
+    }
+  }
+}

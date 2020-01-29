@@ -1,6 +1,6 @@
 import React from "react";
-
-import LandingPage from './components/landingpage'
+import "./sass/main.scss";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
