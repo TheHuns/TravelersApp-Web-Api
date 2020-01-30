@@ -61,11 +61,6 @@ Then the single command will get client and api running simultaneously
 yarn dev
 ```
 
-> If you need to work on the design/style, you'll need to open another tab in your terminal and run the following command
-
-```
-yarn sass
-```
 
 ---
 
