@@ -2,23 +2,38 @@
 
 // imports
 import React, { useState } from "react";
-import { Query } from 'react-apollo'
+import { gql } from 'apollo-boost';
+import { graphql } from "react-apollo";
 
 const AddPlaceForm = () => {
 
-	const LAUNCHES_QUERY = gql`
-		mutation LaunchesQuery {
-			venue {
-				businessName
-				category
-				website
-				phone
-				address
-				state
-				zip
-				hours
-				parking
-			}
+	const addPlaceMutation = gql`
+		mutation($businessName: String!, $category: String!, $website: String!, $phone: Number!,
+		 $address: String, $state: String, $locationId: ID!, $monday: Array, $tuesday: Array,
+		  $wednesday: Array, $thursday: Array, $friday: Array, $saturday: Array, $sunday: Array) {
+  			addVenue(
+    			venueInfo: {
+				    businessName: $businessName
+				    category: $category
+				    website: $website
+				    phone: $phone
+				    address: $address
+				    state: $state,
+				    locationId: $locationId
+    			},
+    			hoursInfo: {      
+			       monday: $monday
+			       tuesday: $tuesday
+			       wednesday: $wednesday
+			       thursday: $thursday
+			       friday: $friday
+			       saturday: $saturday
+			       sunday: $sunday
+    			}
+  			) {
+    		businessName
+    		id
+  			}
 		}
 	`;
 
@@ -229,6 +244,13 @@ const AddPlaceForm = () => {
 		}
 	];
 
+	const CityStates = {
+			Select: [],
+			Massachusetts: ["Boston"],
+			Colorado: ["Denver", "Boulder"],
+			California: ["Los Angeles", "San Francisco", "San Diego", "Fresno"]
+		}
+
 	const hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	const renderedStates = States.map(state => {
@@ -237,6 +259,9 @@ const AddPlaceForm = () => {
 	const renderedHours = hours.map((hour, index) => {
 	    return <option key={index}>{hour}</option>;
 	  });
+	const renderedStateDropdown = States.map((loc, index) => {
+		return <option key={index}>{loc.name}</option>
+	})
 
 	const initialState = {
 	    businessName: "",
@@ -246,8 +271,9 @@ const AddPlaceForm = () => {
 	    address: "",
 	    address2: "",
 	    city: "",
-	    state: "",
-	    zipcode: "",
+	    state: "Select",
+	    locationId: 1234,
+	    zip: "",
 	    parking: [],
 	    hours: {
 	    	monday1: null,
@@ -265,10 +291,62 @@ const AddPlaceForm = () => {
 	    	sunday1: null,
 	    	sunday2: null,
 	    },
-	    photos: ""
+	    photos: "",
+	    errorMessage: ""
 	  };
 
 	const [data, updateData] = useState(initialState);
+
+    const renderedCityDropdown = CityStates[data.state].map((city, index) => {
+		return <option key={index}>{city}</option>
+	})
+
+	// Finish the submit request
+	const handleSubmit = (event) => {
+		event.preventDefault()
+		if (!data.businessName || !data.category || data.address) {
+			let address = data.address + data.address2
+			let monday = [data.hours.monday1, data.hours.monday2]
+			let tuesday = [data.hours.tuesday1, data.hours.tuesday2]
+			let wednesday = [data.hours.wednesday1, data.hours.wednesday2]
+			let thursday = [data.hours.thursday1, data.hours.thursday2]
+			let friday = [data.hours.friday1, data.hours.friday2]
+			let saturday = [data.hours.saturday1, data.hours.saturday2]
+			let sunday = [data.hours.sunday1, data.hours.sunday2]
+			let {businessName, category, website, phone, city, state, locationId, zip, parking } = data
+			addPlaceMutation({
+	      		 variables: {
+	        		businessName,
+	        		category,
+	        		website, 
+	        		phone,
+	        		address,
+	        		city,
+	        		state,
+	        		locationId,
+	        		zip,
+	        		parking,
+	        		monday,
+	        		tuesday,
+	        		wednesday,
+	        		thursday,
+	        		friday,
+	        		saturday,
+	        		sunday
+	      		},
+		    });
+		    updateData({
+				...data,
+				errorMessage: ""
+			})
+		} else {
+			updateData({
+				...data,
+				errorMessage: "Please fill out all required fields"
+			})
+		}
+
+	}
 
 	const handleChange = (e) => {
 		updateData({
@@ -297,18 +375,24 @@ const AddPlaceForm = () => {
 		})
 	}
 
-	const handleSubmit = (event) => {
-		event.preventDefault()
-	}
-
 	return (
 	    <div className="formContainer">
-	      <form id="addPlace">
+	    <div className="locationDropdowns">
+	    	<select onChange={handleChange} name="state">
+	    	<option>Select State</option>
+	    	{renderedStateDropdown}
+	    	</select>
+	    	<select onChange={handleChange} name="city">
+	    	<option>Select a City</option>
+	    	{renderedCityDropdown}	    	
+	    	</select>
+	    </div>
+	      <form id="addPlace" onSubmit={handleSubmit}>
 	        <div className="top-form">
 	          <label htmlFor="businessName">Business Name</label>
-	          <input onChange={handleChange} type="text" name="businessName" id="businessName" required />
+	          <input onChange={handleChange} className={data.errorMessage ? "error" : "businessName"} type="text" name="businessName" id="businessName" required />
 	          <label htmlFor="category">Category</label>
-	          <select onChange={handleChange} name="category" id="category" form="addPlace" required>
+	          <select onChange={handleChange} className={data.errorMessage ? "error" : "category"} name="category" id="category" form="addPlace" required>
 	            <option disabled selected hidden>
 	              Please select a category
 	            </option>
@@ -324,16 +408,10 @@ const AddPlaceForm = () => {
 	        </div>
 	        <div className="middle-form">
 	          <label htmlFor="address">Address</label>
-	          <input onChange={handleChange} type="text" name="address" id="address" required />
+	          <input onChange={handleChange} className={data.errorMessage ? "error" : "address"} type="text" name="address" id="address" required />
 	          <input onChange={handleChange} type="text" name="address2" id="address" />
-	          <label htmlFor="city">City</label>
-	          <input onChange={handleChange} type="text" name="city" id="city" required />
-	          <label htmlFor="state">State</label>
-	          <select onChange={handleChange} name="state" id="state" form="addPlace" required>
-	            {renderedStates}
-	          </select>
-	          <label htmlFor="zipcode">Zipcode</label>
-	          <input onChange={handleChange} type="text" name="zipcode" id="zipcode" />
+	          <label htmlFor="zip">Zipcode</label>
+	          <input onChange={handleChange} type="text" name="zip" id="zip" />
 	          <legend>Parking</legend>
 	          <input onChange={handleParking} type="checkbox" name="Lot" id="Check1" />
 	          <label htmlFor="Check1" check>
@@ -418,7 +496,7 @@ const AddPlaceForm = () => {
 	        <div className="bottom-form">
 	          <label htmlFor="exampleFile">Pictures</label>
 	          <input onChange={handleChange} type="file" name="file" id="exampleFile" />
-	          <button>Submit</button>
+	          <button type="submit">Submit</button>
 	        </div>
 	      </form>
 	    </div>
