@@ -4,10 +4,11 @@
 import React, { useState } from "react";
 import { gql } from 'apollo-boost';
 import { graphql } from "react-apollo";
+import { useMutation } from '@apollo/react-hooks';
 
 const AddPlaceForm = () => {
 
-	const addPlaceMutation = gql`
+	const ADD_PLACE = gql`
 		mutation($businessName: String!, $category: String!, $website: String!, $phone: Number!,
 		 $address: String, $state: String, $locationId: ID!, $monday: Array, $tuesday: Array,
 		  $wednesday: Array, $thursday: Array, $friday: Array, $saturday: Array, $sunday: Array) {
@@ -263,6 +264,8 @@ const AddPlaceForm = () => {
 		return <option key={index}>{loc.name}</option>
 	})
 
+	const [addPlace, { loading, error }] = useMutation(ADD_PLACE);
+
 	const initialState = {
 	    businessName: "",
 	    category: "",
@@ -314,7 +317,7 @@ const AddPlaceForm = () => {
 			let saturday = [data.hours.saturday1, data.hours.saturday2]
 			let sunday = [data.hours.sunday1, data.hours.sunday2]
 			let {businessName, category, website, phone, city, state, locationId, zip, parking } = data
-			addPlaceMutation({
+			addPlace({
 	      		 variables: {
 	        		businessName,
 	        		category,
