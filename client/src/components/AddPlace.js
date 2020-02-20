@@ -9,9 +9,9 @@ import { useMutation } from '@apollo/react-hooks';
 const AddPlaceForm = () => {
 
 	const ADD_PLACE = gql`
-		mutation($businessName: String!, $category: String!, $website: String!, $phone: Number!,
-		 $address: String, $state: String, $locationId: ID!, $monday: Array, $tuesday: Array,
-		  $wednesday: Array, $thursday: Array, $friday: Array, $saturday: Array, $sunday: Array) {
+		mutation($businessName: String!, $category: String!, $website: String, $phone: String,
+		 $address: String!, $state: String, $locationId: ID!, $monday: [Int], $tuesday: [Int],
+		  $wednesday: [Int], $thursday: [Int], $friday: [Int], $saturday: [Int], $sunday: [Int]) {
   			addVenue(
     			venueInfo: {
 				    businessName: $businessName
@@ -264,7 +264,9 @@ const AddPlaceForm = () => {
 		return <option key={index}>{loc.name}</option>
 	})
 
-	const [addPlace, { loading, error }] = useMutation(ADD_PLACE);
+	const [addPlace, { loading, error }] = useMutation(ADD_PLACE, {
+													onError: (error) => console.log(error.message)
+	});
 
 	const initialState = {
 	    businessName: "",
@@ -337,7 +339,8 @@ const AddPlaceForm = () => {
 	        		saturday,
 	        		sunday
 	      		},
-		    });
+		    })
+				;
 		    updateData({
 				...data,
 				errorMessage: ""
