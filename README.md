@@ -23,6 +23,19 @@ yarn install-all
 
 ---
 
+#### Auth0 setup
+
+In the .env file (same as for Open Cage GeoLocator) you will need to add the following two lines.
+
+> I will share these in our slack or sign up at auth0.com and create a new "Application" for this project type: Single Page Application
+
+```
+REACT_APP_DOMAIN= "<will share in slack>"
+REACT_APP_CLIENT_ID= "<will share in slack>"
+```
+
+---
+
 #### Connecting to MongoDB
 
 In the root of the project you need a directory named config which contains a file named default.json (create these if they do not come in with repo)
@@ -60,7 +73,6 @@ Then the single command will get client and api running simultaneously
 ```
 yarn dev
 ```
-
 
 ---
 

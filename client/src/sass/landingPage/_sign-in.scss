@@ -1,0 +1,48 @@
+.sign-in {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  z-index: 3;
+  height: fit-content;
+  width: fit-content;
+
+  button {
+    background: $mid-dark;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    color: $accent-gold;
+    cursor: pointer;
+  }
+
+  .user-info {
+    z-index: 3;
+    display: flex;
+    width: 300px;
+    align-items: center;
+
+    button {
+      display: inline-block;
+      background: $mid-dark;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      color: $accent-gold;
+      cursor: pointer;
+      justify-self: flex-end;
+    }
+
+    p {
+      color: $text-light;
+      margin-right: 2rem;
+    }
+
+    img {
+      height: 24px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+    }
+  }
+}

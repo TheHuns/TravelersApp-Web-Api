@@ -11,8 +11,9 @@ import FoodIcon from "./icons/FoodIcon";
 import DrinksIcon from "./icons/DrinksIcon";
 import PeopleIcon from "./icons/PeopleIcon";
 import BrandSVG from "./icons/BrandSVG";
+import SignIn from "./SignIn";
 
-function LandingPage() {
+function LandingPage({ user }) {
   const [icon, chooseIcon] = useState("Anything");
   const [input, updateInput] = useState("");
   const [placeholder, setPlaceholder] = useState(
@@ -59,6 +60,16 @@ function LandingPage() {
     chooseIcon(e.target.getAttribute("name"));
   }
 
+  /*
+  Listen in input for "Enter" key to be pressed to execute Search
+   Same as clicking on search Button 
+   */
+  function keyPressed(e) {
+    if (e.key === "Enter") {
+      handleSearchSubmit();
+    }
+  }
+
   function handleTextInput(e) {
     updateInput(e.target.value);
   }
@@ -70,9 +81,7 @@ function LandingPage() {
   return (
     <div id="landingContainer">
       <div className="overlay"></div>
-      <div className="sign-in">
-        <a href="#">Sign In</a>
-      </div>
+      <SignIn />
       <div className="search-area">
         {/* Main logo area */}
         <svg id="logo" viewBox="0 0 540 230">
@@ -137,6 +146,7 @@ function LandingPage() {
             <input
               onChange={handleTextInput}
               type="text"
+              onKeyPress={keyPressed}
               placeholder={placeholder}
               className="searchInput"
             />

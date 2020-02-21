@@ -20,20 +20,6 @@
     z-index: 2;
   }
 
-  .sign-in {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
-    z-index: 3;
-
-    a {
-      color: $text-light;
-      text-decoration: none;
-    }
-  }
-
   .search-area {
     width: 40%;
     z-index: 3;
