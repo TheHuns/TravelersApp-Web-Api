@@ -309,7 +309,12 @@ const AddPlaceForm = () => {
 	// Finish the submit request
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		if (!data.businessName || !data.category || data.address) {
+		if (!data.businessName || !data.category || !data.address) {
+			updateData({
+				...data,
+				errorMessage: "Please fill out all required fields"
+			})
+		} else {
 			let address = data.address + data.address2
 			let monday = [data.hours.monday1, data.hours.monday2]
 			let tuesday = [data.hours.tuesday1, data.hours.tuesday2]
@@ -345,13 +350,7 @@ const AddPlaceForm = () => {
 				...data,
 				errorMessage: ""
 			})
-		} else {
-			updateData({
-				...data,
-				errorMessage: "Please fill out all required fields"
-			})
 		}
-
 	}
 
 	const handleChange = (e) => {
@@ -505,6 +504,7 @@ const AddPlaceForm = () => {
 	          <button type="submit">Submit</button>
 	        </div>
 	      </form>
+	      <span>{data.errorMessage}</span>
 	    </div>
 	);
 };
