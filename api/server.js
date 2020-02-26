@@ -72,11 +72,11 @@ const typeDefs = gql`
   input VenueInfo {
     businessName: String!
     category: String!
-    website: String!
-    phone: String!
+    website: String
+    phone: String
     address: String!
     locationId: ID!
-    state: String!
+    state: String
     zip: Int
     parking: String
   }
